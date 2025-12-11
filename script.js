@@ -4,12 +4,16 @@ let turn = true;
 let ntf = document.querySelector('.notification');
 let msg = document.querySelector('#msg');
 let okbtn = document.querySelector('#ok'); 
+let sounds = document.querySelectorAll('.soundeffect');
+let counter = 0;
 
 const resetGame = () => {
     boxes.forEach((box) => {
         box.innerText = '';
     });
+    counter = 0;
     turn = true;
+    gameOver = false;
 }
 
 const winPatterns = [
@@ -25,33 +29,60 @@ const winPatterns = [
 
 boxes.forEach((box) => {
     box.addEventListener('click', () => {
-        if (box.innerText === '') 
-            {
-                box.innerText = turn ? 'X' : 'O';
-                turn = !turn;
-            }
+        if (box.innerText === '') {
+
+            sounds[2].currentTime = 0;
+            sounds[2].play();
+
+            box.innerText = turn ? 'X' : 'O';
+            turn = !turn;
+            counter++;
             checkWinner();
-        });
+        }
+    });
 });
 
 const checkWinner = () => {
-    winPatterns.forEach((pattern) =>{
+
+    winPatterns.forEach((pattern) => {
+
         let pos1val = boxes[pattern[0]].innerText;
         let pos2val = boxes[pattern[1]].innerText;
         let pos3val = boxes[pattern[2]].innerText;
 
         if (pos1val !== '' && pos1val === pos2val && pos2val === pos3val) {
-            
-            ntf.style.display = 'flex'; 
+            ntf.style.display = 'flex';
             msg.innerText = `Player ${pos1val} Wins!`;
+
+            sounds[0].currentTime = 0;
+            sounds[0].play();
+
             resetGame();
         }
-    })
-}
+    });
 
-resetbtn.addEventListener('click', resetGame);
+    
+    if (counter === 9 ){
+        ntf.style.display = 'flex'; 
+        msg.innerText = `It's a Draw!`;
+
+        sounds[1].currentTime = 0;
+        sounds[1].play();
+        
+        resetGame();
+    }
+        
+};
+
+resetbtn.addEventListener('click', () => {
+    resetGame();
+    sounds[2].currentTime = 0;
+    sounds[2].play();
+});
 
 okbtn.addEventListener('click', () => {
+    sounds[2].currentTime = 0;
+    sounds[2].play();
     ntf.style.display = 'none';
 });
 
