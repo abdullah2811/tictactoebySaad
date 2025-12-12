@@ -10,6 +10,7 @@ let counter = 0;
 const resetGame = () => {
     boxes.forEach((box) => {
         box.innerText = '';
+        box.disabled = false;
     });
     counter = 0;
     turn = true;
@@ -51,39 +52,53 @@ const checkWinner = () => {
         let pos3val = boxes[pattern[2]].innerText;
 
         if (pos1val !== '' && pos1val === pos2val && pos2val === pos3val) {
-            ntf.style.display = 'flex';
-            msg.innerText = `Player ${pos1val} Wins!`;
+            
+            boxes.forEach((box)  =>  {
+                box.disabled = true;
+            })
 
             sounds[0].currentTime = 0;
             sounds[0].play();
+            
+            ntf.style.display = 'flex';
+            msg.innerText = `Player ${pos1val} Wins!`;
 
-            resetGame();
         }
     });
 
     
     if (counter === 9 ){
+
         ntf.style.display = 'flex'; 
         msg.innerText = `It's a Draw!`;
 
         sounds[1].currentTime = 0;
         sounds[1].play();
+
+        boxes.forEach((box)  =>  {
+                box.disabled = true;
+        })
         
-        resetGame();
     }
         
 };
 
 resetbtn.addEventListener('click', () => {
-    resetGame();
+    
     sounds[2].currentTime = 0;
     sounds[2].play();
+    
+    resetGame();
 });
 
 okbtn.addEventListener('click', () => {
+
     sounds[2].currentTime = 0;
     sounds[2].play();
+
     ntf.style.display = 'none';
+
+    resetGame();
 });
 
 

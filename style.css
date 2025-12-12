@@ -94,6 +94,7 @@ body{
     display:none;
     flex-direction: column;
     gap: 4vmin;
+    z-index: 1 ;
     
 }
 
