@@ -58,7 +58,7 @@ body{
 }
 
 #reset  {
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 20px 30px;
     font-size: 16px;
     background-color: hsl(27, 85%, 51%);
@@ -80,7 +80,7 @@ body{
 
 .notification{
     background-color: #776bd6;
-    height: 25vmin;
+    height: 30vmin;
     width: 70vmin;
     position: fixed;
     top: 50%;
@@ -99,12 +99,12 @@ body{
 #msg{
     color: white;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    font-size: 30px;
+    font-size: 4.5vmin;
     font-family: monospace;
 }
 
 #ok{
-    padding: 10px 20px;
+    padding: 3vmin 4.5vmin;
     font-size: 16px;
     background-color: hsl(27, 85%, 51%);
     color: white;
