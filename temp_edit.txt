@@ -1,0 +1,1 @@
+Editing shell padding from "18px 22px 28px" to "24px" for even spacing
