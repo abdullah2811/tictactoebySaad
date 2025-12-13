@@ -1,21 +1,169 @@
+/* Theme variables for quick tuning */
+:root {
+    --bg1: #0f2027;
+    --bg2: #203a43;
+    --bg3: #2c5364;
+    --primary: #22c1c3;
+    --primary-700: #1aa0a1;
+    --accent: #ff8f3f;
+    --accent-700: #e57e2f;
+    --tile: #ffffff;
+    --tile-text: #178888;
+    --shadow-1: rgba(0, 0, 0, 0.25);
+    --shadow-2: rgba(0, 0, 0, 0.45);
+    --ring: rgba(34, 193, 195, 0.35);
+}
+
 *{
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+/* Page */
+body{
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--bg1), var(--bg2) 50%, var(--bg3));
+    color: #fff;
+    text-align: center;
+    font-family: monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    overflow-x: hidden;
+    animation: fadeIn 240ms ease forwards;
+}
+
+/* Subtle animated background grid */
+body::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 10%, rgba(255,255,255,0.06) 0, transparent 35%),
+                radial-gradient(circle at 80% 70%, rgba(255,255,255,0.05) 0, transparent 40%);
+    pointer-events: none;
+    animation: floatBg 16s ease-in-out infinite;
+}
+
+/* Additional floating glows */
+body::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 10% 80%, rgba(34,193,195,0.16) 0, transparent 35%),
+                radial-gradient(circle at 90% 10%, rgba(255,143,63,0.14) 0, transparent 32%);
+    pointer-events: none;
+    mix-blend-mode: screen;
+    filter: blur(8px);
+}
+
+.ambient {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(32px);
+    opacity: 0.55;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.ambient-1 {
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(34,193,195,0.6), rgba(34,193,195,0));
+    top: 6%;
+    left: 12%;
+    animation: drift1 18s ease-in-out infinite;
+}
+
+.ambient-2 {
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(255,143,63,0.6), rgba(255,143,63,0));
+    bottom: 8%;
+    right: 10%;
+    animation: drift2 20s ease-in-out infinite;
+}
+
+.ambient-3 {
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(108,99,255,0.55), rgba(108,99,255,0));
+    top: 25%;
+    right: 30%;
+    animation: drift3 22s ease-in-out infinite;
+}
+
+@keyframes drift1 {
+    0%   { transform: translate(0,0) scale(1); }
+    50%  { transform: translate(-20px,10px) scale(1.08); }
+    100% { transform: translate(0,0) scale(1); }
+}
+
+@keyframes drift2 {
+    0%   { transform: translate(0,0) scale(1); }
+    50%  { transform: translate(18px,-14px) scale(1.05); }
+    100% { transform: translate(0,0) scale(1); }
+}
+
+@keyframes drift3 {
+    0%   { transform: translate(0,0) scale(1); }
+    50%  { transform: translate(-14px,-10px) scale(1.07); }
+}
+
+@keyframes floatBg {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.02); }
 }
 
 h1{
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    color: #fff;
     font-family: monospace;
-    font-size: 50px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    font-size: clamp(32px, 6vmin, 56px);
+    margin-top: 32px;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+    text-shadow: 0 10px 20px var(--shadow-2);
+    position: relative;
 }
 
-body{
-    background-color: rgb(142, 241, 241);
-    text-align: center;
-    font-family: monospace;
+h1::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -10px;
+    width: 120px;
+    height: 3px;
+    transform: translateX(-50%);
+    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    filter: blur(0.5px);
+}
+
+h1{
+    animation: fadeSlideDown 720ms ease both;
+}
+
+.shell {
+    width: min(980px, 94vw);
+    margin: 18px auto 36px;
+    padding: 18px 22px 28px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+    backdrop-filter: blur(12px);
+    animation: fadeSlideUp 760ms ease both;
+    position: relative;
+    overflow: hidden;
+}
+
+.shell::after {
+    content: "";
+    position: absolute;
+    inset: -30% -10%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.07), transparent 50%);
+    pointer-events: none;
 }
 
 .container{
@@ -23,103 +171,264 @@ body{
     display: flex;  
     justify-content: center;
     align-items: center; 
+    padding: 2vmin;
+    animation: floatUp 820ms ease both 120ms;
 }
 
 .game{
     height: 60vmin;
     width: 60vmin;
     gap: 2vmin;
-    display: flex; 
-    flex-wrap: wrap; 
-    justify-content: center;
-    align-items: center; 
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    place-items: center;
+    backdrop-filter: blur(4px);
+    padding: 2vmin;
+    border-radius: 12px;
+    box-shadow: 0 20px 40px var(--shadow-2);
+    background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0));
+    animation: popInBoard 700ms ease 160ms both;
 }
 
 .box{
     height: 18vmin;
     width: 18vmin;
-    background-color: white;
-    border:none;
-    border-radius: 5px;
-    text-decoration: none;
-    color: rgb(23, 136, 136);
+    background: var(--tile);
+    border: none;
+    border-radius: 12px;
+    color: var(--tile-text);
     font-family: monospace;
-    font-size: 6vmin; 
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-    transition: transform 0.1s ease;
+    font-size: 6vmin;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 10px 25px var(--shadow-1), inset 0 -2px 0 rgba(0,0,0,0.06);
+    transition: transform 140ms ease, box-shadow 180ms ease, background 180ms ease, filter 180ms ease;
+    position: relative;
+    outline: none;
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.box::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    box-shadow: 0 0 0 0 var(--ring);
+    transition: box-shadow 180ms ease;
 }
 
 .box:hover{
     cursor: pointer;
-    background-color: rgb(197, 197, 197);
+    transform: translateY(-2px);
+    box-shadow: 0 14px 28px var(--shadow-2);
+    filter: saturate(1.1);
 }
 
 .box:active{
-    transform:scale(0.9);
+    transform: scale(0.97);
 }
 
+.box:focus-visible::after{
+    box-shadow: 0 0 0 6px var(--ring);
+}
+
+/* Optional mark coloring if using X/O */
+.box.x { color: #ff4d6d; }
+.box.o { color: #0077ff; }
+.box.x { background-image: url('playerX.png'); }
+.box.o { background-image: url('playerO.png'); }
+
+/* Reset button */
 #reset  {
-    margin-top: 10px;
-    padding: 3vmin 4.5vmin;
-    font-size: 16px;
-    background-color: hsl(27, 85%, 51%);
+    margin-top: 18px;
+    padding: 2.6vmin 4vmin;
+    font-size: clamp(14px, 2.4vmin, 18px);
+    background: linear-gradient(135deg, var(--accent), var(--accent-700));
     color: white;
     border: none;
-    border-radius: 5px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-    transition: transform 0.1s ease;
+    border-radius: 999px;
+    box-shadow: 0 10px 20px var(--shadow-2);
+    transition: transform 160ms ease, box-shadow 180ms ease, filter 180ms ease;
 }
 
 #reset:hover{
     cursor: pointer;
-    background-color: hsl(27, 86%, 44%);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px var(--shadow-2);
+    filter: brightness(1.05);
 }
 
 #reset:active{
-    transform:scale(0.9);
+    transform: translateY(0) scale(0.98);
 }
 
+/* Notification Modal */
 .notification{
-    background-color: #776bd6;
-    height: 30vmin;
-    width: 70vmin;
+    background: linear-gradient(135deg, #7c3aed 0%, #6b61e6 50%, #5147d0 100%);
+    height: auto;
+    width: min(80vmin, 92vw);
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 10px;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+    transform: translate(-50%, -50%) scale(0.9);
+    border-radius: 24px;
+    box-shadow: 0 0 60px rgba(124,58,237,0.4), 0 40px 80px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.12);
     align-items: center;
     justify-content: center;
-    display:none;
+    display: none;
     flex-direction: column;
-    gap: 4vmin;
-    z-index: 1 ;
-    
+    gap: 5vmin;
+    z-index: 10;
+    padding: 5vmin 5.5vmin;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.12);
+    opacity: 0;
+    animation: popInModal 420ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    overflow: hidden;
+}
+
+/* Shimmer shine effect on modal */
+.notification::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+    transform: translateX(-100%);
+    animation: shimmer 2.2s ease-in-out infinite;
+    border-radius: 24px;
+    pointer-events: none;
+}
+
+.notification::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.08), transparent 40%);
+    border-radius: 24px;
+    pointer-events: none;
+}
+
+@keyframes popInModal {
+    0%   { opacity: 0; transform: translate(-50%, -50%) scale(0.85) rotateX(-10deg); }
+    50%  { transform: translate(-50%, -50%) scale(1.02); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotateX(0); }
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+/* Optional overlay when modal shows; add/remove via script */
+.backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.56);
+    backdrop-filter: blur(4px);
+    z-index: 9;
+    animation: backdropFadeIn 300ms ease forwards;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.3);
+}
+
+@keyframes backdropFadeIn {
+    from { opacity: 0; backdrop-filter: blur(0); }
+    to { opacity: 1; backdrop-filter: blur(4px); }
 }
 
 #msg{
     color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    font-size: 6vmin;
+    font-size: clamp(24px, 5.8vmin, 40px);
+    font-weight: 700;
     font-family: monospace;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.4), 0 0 20px rgba(255,255,255,0.08);
+    letter-spacing: 1px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    animation: textPulse 600ms ease-out 100ms both;
+}
+
+@keyframes textPulse {
+    0% { opacity: 0; transform: scale(0.85) translateY(8px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 #ok{
-    padding: 2vmin 4vmin;
-    font-size: 3vmin;
-    background-color: hsl(27, 85%, 51%);
+    padding: 2.4vmin 5vmin;
+    font-size: clamp(15px, 2.8vmin, 18px);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #ff9d4a 0%, var(--accent) 50%, var(--accent-700) 100%);
     color: white;
     border: none;
-    border-radius: 5px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 999px;
+    box-shadow: 0 8px 20px rgba(255,143,63,0.4), 0 0 30px rgba(255,143,63,0.2);
+    transition: transform 160ms ease, box-shadow 200ms ease, filter 180ms ease;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+    animation: buttonSlide 500ms ease 200ms both;
+}
+
+@keyframes buttonSlide {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 #ok:hover{
-    cursor: pointer;
-    background-color: hsl(27, 86%, 44%);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(255,143,63,0.5), 0 0 40px rgba(255,143,63,0.3);
+    filter: brightness(1.08);
 }
 
 #ok:active{
-    transform:scale(0.9);
+    transform: translateY(-1px) scale(0.97);
+    box-shadow: 0 6px 16px rgba(255,143,63,0.4);
+}
+
+#ok:focus-visible {
+    outline: 2px solid rgba(255,255,255,0.4);
+    outline-offset: 2px;
+}
+
+/* Responsive fine-tuning */
+@media (max-width: 520px) {
+    .container { height: auto; }
+    .game { height: 90vmin; width: 90vmin; }
+    .box { height: 28vmin; width: 28vmin; font-size: 10vmin; }
+}
+
+/* Fun subtle pulse on game appear; add class via JS if desired */
+.game.pulse {
+    animation: pulseGlow 1200ms ease forwards;
+}
+
+@keyframes pulseGlow {
+    0%   { box-shadow: 0 0 0 0 rgba(34,193,195,0.0); }
+    50%  { box-shadow: 0 0 0 22px rgba(34,193,195,0.12); }
+    100% { box-shadow: 0 20px 40px var(--shadow-2); }
+}
+
+@keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeSlideDown {
+    from { opacity: 0; transform: translateY(-14px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popInBoard {
+    0% { opacity: 0; transform: scale(0.92); }
+    60% { opacity: 1; transform: scale(1.02); }
+    100% { opacity: 1; transform: scale(1); }
 }

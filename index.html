@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="ambient ambient-1"></div>
+    <div class="ambient ambient-2"></div>
+    <div class="ambient ambient-3"></div>
     
     <div class = "notification">
         <p id = "msg"></p>
@@ -14,12 +17,16 @@
     </div>
 
     <h1>Tic Tac Toe</h1>
+    
+    
+    <audio class = "soundeffect" id="clickX-audio" src="sounds/clickX.mp3"></audio>
+    <audio class = "soundeffect" id="clickO-audio" src="sounds/clickO.mp3"></audio>
+    <audio class = "soundeffect" id="win-audio" src="sounds/win.mp3"></audio>
+    <audio class = "soundeffect" id="draw-audio" src="sounds/draw.mp3"></audio>
+    <audio class = "soundeffect" id="reset-audio" src="sounds/reset.mp3"></audio>
+    <audio class = "soundeffect" id="newGame-audio" src="sounds/newGame.mp3"></audio>
 
-    <audio class = "soundeffect" id="win-audio" src="sounds/win.wav"></audio>
-    <audio class = "soundeffect" id="draw-audio" src="sounds/draw.wav"></audio>
-    <audio class = "soundeffect" id="click-audio" src="sounds/click.wav"></audio>
-
-    <main>
+    <main class="shell">
         <div class = "container">
             <div class = "game">
                 <button class = "box"></button>
@@ -34,8 +41,7 @@
             </div>
         </div>
         <button id = "reset">Reset Game</button>
-    </div>
-</main>
+    </main>
     
     <script src = "script.js"></script>
 </body>
